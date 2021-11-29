@@ -15,14 +15,14 @@ In this study, we propose RecSleepNet, an automatic sleep staging model based on
 
 ## Data preparing
 
-We used three datasets: Sleep-EDF, ISURC and UCDDB to evaluate RecSleepNet, all datasets could be downloaded on [PhysioNet](https://physionetchallenges.org/2020/). 
+We used three datasets: [Sleep-EDF](https://physionet.org/content/sleep-edfx/1.0.0/),  [ISURC](https://sleeptight.isr.uc.pt/ISRUC_Slee) and [UCDDB](https://physionet.org/content/ucddb/1.0.0/) to evaluate RecSleepNet. 
 All labels annotated by the R\&K manual were transformed to the AASM manual. All MOVEMENT and UNKNOWN sleep segments were excluded. All EEG signals were re-sampled at 100Hz. All EEG segments 30 minutes before first and after last non-W segment were excluded. 
 
 The default data directory is "./data".
 
 A whole night's EEG file should be a "*.npz" file which includes "x": EEG signal and "y":labels.
 
-For example, "./data/isruc/subject0.npz", "./data/ucddb/ucddb002.npz" and "./data/sleepedf/SC4001E0.npz" respectively are records in ISRUC, UCDDB and SleepEDF datasets.
+For example, "./data/isruc/subject0.npz", "./data/ucddb/ucddb002.npz" and "./data/sleepedf/SC4001E0.npz" respectively denote records in ISRUC, UCDDB and SleepEDF datasets.
 
 ## Training
 
