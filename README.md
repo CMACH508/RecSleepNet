@@ -2,7 +2,9 @@
 
 Sleep staging via electroencephalogram (EEG) is the fundamental step to sleep quality assessment and disease diagnose. Deep learning methods have been demonstrated to be promising for automatic sleep staging, but the performance is still not satisfied, because learning representations over the EEG signals is very challenging.
 
-In this study, we propose RecSleepNet, an automatic sleep staging model based on a hybrid structure of Convolutional Neural Networks (CNN) and Long Short Term Memory (LSTM) networks. To enhance the representation learning, we devise a Convolutional Reconstruction Block (CRB), which enforces the extracted features to reconstruct the previous low-level input well. %The use of CRB also speeds up the training process. Moreover, we introduce a Global Max and Average Pooling Block (GMAPB) to squeeze parameter numbers and extract shift-invariant features. Experiments on four public datasets of single-channel EEG signals indicate that RecSleepNet achieves better or at least comparable performance to the state-of-the-art methods. CRB and GMAPB enable the training to be more efficient with fewer parameters but faster convergence.
+In this study, we propose RecSleepNet, an automatic sleep staging model based on a hybrid structure of Convolutional Neural Networks (CNN) and Long Short Term Memory (LSTM) networks. To enhance the representation learning, we devise a Convolutional Reconstruction Block (CRB), which enforces the extracted features to reconstruct the previous low-level input well. The use of CRB also speeds up the training process. 
+
+Moreover, we introduce a Global Max and Average Pooling Block (GMAPB) to squeeze parameter numbers and extract shift-invariant features. Experiments on four public datasets of single-channel EEG signals indicate that RecSleepNet achieves better or at least comparable performance to the state-of-the-art methods. CRB and GMAPB enable the training to be more efficient with fewer parameters but faster convergence.
 
 ## Requirements
 
@@ -15,14 +17,29 @@ In this study, we propose RecSleepNet, an automatic sleep staging model based on
 
 ## Data preparing
 
-We used three datasets: [Sleep-EDF](https://physionet.org/content/sleep-edfx/1.0.0/),  [ISURC](https://sleeptight.isr.uc.pt/ISRUC_Slee) and [UCDDB](https://physionet.org/content/ucddb/1.0.0/) to evaluate RecSleepNet. 
+We used three datasets: [Sleep-EDF](https://www.physionet.org/content/sleep-edf/1.0.0/), [ISURC](https://sleeptight.isr.uc.pt/) and [UCDDB](https://physionet.org/content/ucddb/1.0.0/) to evaluate RecSleepNet.
 All labels annotated by the R\&K manual were transformed to the AASM manual. All MOVEMENT and UNKNOWN sleep segments were excluded. All EEG signals were re-sampled at 100Hz. All EEG segments 30 minutes before first and after last non-W segment were excluded. 
 
-The default data directory is "./data".
+The default preprocessed data directory is "./data".
 
 A whole night's EEG file should be a "*.npz" file which includes "x": EEG signal and "y":labels.
 
-For example, "./data/isruc/subject0.npz", "./data/ucddb/ucddb002.npz" and "./data/sleepedf/SC4001E0.npz" respectively denote records in ISRUC, UCDDB and SleepEDF datasets.
+For example, "./data/isruc/subject0.npz", "./data/ucddb/ucddb002.npz" and "./data/sleepedf/SC4001E0.npz" respectively correspond to the records in ISRUC, UCDDB and SleepEDF datasets.
+
+Preprocessing ISRUC dataset:
+
+ ```shell 
+python prepare_isruc.py --data_dir "./raw_data/isruc" --output_dir "./data/isruc" --select_ch "EEG Fpz-Cz" 
+ 
+ ```
+
+Some of the available arguments are:
+
+| Argument   | Description                          | Default         |
+| ---------- | :----------------------------------- | --------------- |
+| data_dir   | the path of raw psg files            | None/Required   |
+| output_dir | the path of npz files                | None/Required   |
+| select_ch  | which EEG channel will be extracted" | C3A2/EEG Fpz-Cz |
 
 ## Training
 
