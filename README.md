@@ -6,6 +6,8 @@ In this study, we propose RecSleepNet, an automatic sleep staging model based on
 
 Moreover, we introduce a Global Max and Average Pooling Block (GMAPB) to squeeze parameter numbers and extract shift-invariant features. Experiments on four public datasets of single-channel EEG signals indicate that RecSleepNet achieves better or at least comparable performance to the state-of-the-art methods. CRB and GMAPB enable the training to be more efficient with fewer parameters but faster convergence.
 
+![](model.png)
+
 ## Requirements
 
 * numpy >= 1.16.1
@@ -17,7 +19,7 @@ Moreover, we introduce a Global Max and Average Pooling Block (GMAPB) to squeeze
 
 ## Data preparing
 
-We used three datasets: [Sleep-EDF](https://www.physionet.org/content/sleep-edf/1.0.0/), [ISURC](https://sleeptight.isr.uc.pt/) and [UCDDB](https://physionet.org/content/ucddb/1.0.0/) to evaluate RecSleepNet.
+We used three datasets: [SleepEDF](https://www.physionet.org/content/sleep-edf/1.0.0/), [ISURC](https://sleeptight.isr.uc.pt/) and [UCDDB](https://physionet.org/content/ucddb/1.0.0/) to evaluate RecSleepNet.
 All labels annotated by the R\&K manual were transformed to the AASM manual. All MOVEMENT and UNKNOWN sleep segments were excluded. All EEG signals were re-sampled at 100Hz. All EEG segments 30 minutes before first and after last non-W segment were excluded. 
 
 The default preprocessed data directory is "./data".
@@ -77,6 +79,12 @@ Some of the available arguments are:
 | -------- | :------------------------------------------ | ------------------ |
 | db       | dataset (sleepedf, sleepedfx, isruc, ucddb) | isruc              |
 | dir      | directory of pre-trained models             | ./pretrained_model |
+
+## Result
+
+![](predict.png)
+
+The whole night sleep stages annotated by our model and sleep experts for subject-1 in SEDF-39 dataset. 
 
 ## Acknowledgement
 
